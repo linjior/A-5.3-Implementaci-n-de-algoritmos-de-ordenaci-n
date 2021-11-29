@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Programas;
-
+import java.util.ArrayList;
+import Clases.GeneradorNumeros;
+import Clases.DatosDesordenados;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author linji
@@ -14,8 +17,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
+    
+    ArrayList array = new ArrayList();
+    DefaultListModel modelo = new DefaultListModel();
+    
     public VentanaPrincipal() {
         initComponents();
+        jList1.setModel(modelo);
     }
 
     /**
@@ -44,6 +52,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Btn_ShellSort = new javax.swing.JButton();
         Btn_Radix = new javax.swing.JButton();
         Btn_Burbuja = new javax.swing.JButton();
+        jButton1_Agregar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1_Lista = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,31 +126,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton1_Agregar.setText("Agregar Lista");
+        jButton1_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1_AgregarActionPerformed(evt);
+            }
+        });
+
+        jTextArea1_Lista.setColumns(20);
+        jTextArea1_Lista.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1_Lista);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Btn_QuickSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Btn_ShellSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Btn_Radix)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_Burbuja))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
-                                    .addComponent(jLabel2))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(41, 41, 41)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1_Agregar))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5)
@@ -153,14 +172,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addGap(29, 29, 29)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(RangoMayor)))
-                                .addComponent(jLabel6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(31, 31, 31)
+                                        .addComponent(RangoMayor))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Btn_QuickSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Btn_ShellSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Btn_Radix)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_Burbuja))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +212,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(RangoMenor)))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jButton1_Agregar))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,6 +265,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         burbuja.setVisible(true);
     }//GEN-LAST:event_Btn_BurbujaActionPerformed
 
+    private void jButton1_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_AgregarActionPerformed
+        GeneradorNumeros generador;
+        DatosDesordenados ordenar = new DatosDesordenados();
+        int n;
+        n = Integer.parseInt(longitud.getText());
+        int s;
+        s = Integer.parseInt(RangoMayor.getText());
+        
+        generador = new GeneradorNumeros(n, s);
+        jTextArea1_Lista.append(ordenar.Radix(generador.generarNumeros()));
+    }//GEN-LAST:event_jButton1_AgregarActionPerformed
+
+    public void introducirDatos(){
+        GeneradorNumeros generador;
+        DatosDesordenados ordenar = new DatosDesordenados();
+        int n;
+        n = Integer.parseInt(longitud.getText());
+        int s;
+        s = Integer.parseInt(RangoMayor.getText());
+        
+        generador = new GeneradorNumeros(n, s);
+        ordenar.Radix(generador.generarNumeros());
+        jTextArea1_Lista.append(ordenar.Radix(generador.generarNumeros()));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -274,6 +332,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton Btn_ShellSort;
     private javax.swing.JTextField RangoMayor;
     private javax.swing.JLabel RangoMenor;
+    private javax.swing.JButton jButton1_Agregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -283,6 +342,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1_Lista;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField longitud;
     // End of variables declaration//GEN-END:variables
